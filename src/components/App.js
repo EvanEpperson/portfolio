@@ -1,11 +1,14 @@
-import React from 'react'
-
+import React from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Header from './ui/Header';
+import theme from './ui/Theme'
+import {ThemeProvider} from '@material-ui/styles'
 
 export default function App() {
   return (
-    <div>
-      <h1>hello world </h1>
-    </div>
+    <ThemeProvider theme={theme} >
+      <Header />
+    </ThemeProvider>
   );
 }
 
