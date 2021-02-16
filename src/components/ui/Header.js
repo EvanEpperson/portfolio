@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../../assets/images/Logo.png";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 // ==========
 // MUI-CORE
 // ==========
@@ -9,14 +9,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { mergeClasses } from "@material-ui/styles";
-import palette from './Theme'
+import {faQuestionCircle} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 
 const styles = makeStyles((theme) => ({
   toolBarMargin: {
       ...theme.mixins.toolbar,
-      marginBottom: "4em"
+      marginBottom: "1.5em"
   },
   logo: {
     marginLeft: '2rem',
@@ -25,6 +26,12 @@ const styles = makeStyles((theme) => ({
   },
   tabContainer: {
     marginLeft: 'auto',
+    [theme.breakpoints.down('md')]: {
+      marginRight: '1rem'
+    }
+  },
+  navIcons: {
+    fontSize: '2rem'
   }
 }))
 
@@ -32,6 +39,7 @@ const styles = makeStyles((theme) => ({
 export default function Header(props) {
     const classes = styles()
     const theme = useTheme()
+    const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
 
     const routes = [
       {  name: "Home", link: "/" },
@@ -57,9 +65,19 @@ export default function Header(props) {
         </div>
       </React.Fragment>
     )
+    
 
 
+    const icons = (
+      (<React.Fragment>
+        <div className={classes.tabContainer} >
+          <Link to="#about">
+            <FontAwesomeIcon icon={faQuestionCircle} title="About Me" className={classes.navIcons} alt={'About Me'} />
 
+          </Link>
+        </div>
+      </React.Fragment>)
+    );
 
 
 
@@ -71,7 +89,7 @@ export default function Header(props) {
           <Button disableRipple >
             <img src={Logo} className={classes.logo} alt={'logo'} />
           </Button>
-          {tabs}</Toolbar>
+          {matchesXS ? icons: tabs} </Toolbar>
       </AppBar>
       <div className={classes.toolBarMargin} ></div>
     </React.Fragment>
