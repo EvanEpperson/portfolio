@@ -42,11 +42,22 @@ export default function Header(props) {
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
 
     const routes = [
-      {  name: "Home", link: "/" },
-      {  name: "About", link: "#about" },
-      {  name: "Contact", link: "#contact" },
-      {name: 'Experience', link: '#experience'}
-
+      { name: "Home", link: "/" },
+      {
+        name: "About",
+        link: "#about",
+        a: "https://www.linkedin.com/in/evanepperson/",
+      },
+      {
+        name: "Contact",
+        link: "#contact",
+        a: "https://www.linkedin.com/in/evanepperson/",
+      },
+      {
+        name: "Experience",
+        link: "#experience",
+        a: "https://github.com/EvanEpperson",
+      },
     ];
 
     const tabs = (
@@ -57,6 +68,7 @@ export default function Header(props) {
             <Tab
               value={route.id}
               label={route.name}
+              href={route.a}
               key={`${route}.${id}`}
               >{route.name} </Tab>
               
@@ -69,14 +81,30 @@ export default function Header(props) {
 
 
     const icons = (
-      (<React.Fragment>
-        <div className={classes.tabContainer} >
-          <Link to="#about">
-            <FontAwesomeIcon icon={faQuestionCircle} title="About Me" className={classes.navIcons} alt={'About Me'} />
-
-          </Link>
+      <React.Fragment>
+        <div className={classes.tabContainer}>
+          <a
+            rel="noopener noreferrer"
+            href="https://github.com/EvanEpperson"
+            target="_blank"
+          >
+            <FontAwesomeIcon
+              icon={faQuestionCircle}
+              // title="About Me"
+              className={classes.navIcons}
+              // alt={"About Me"}
+              rel="noopener noreferrer"
+            />
+            <a
+              rel="noopener noreferrer"
+              href="https://github.com/EvanEpperson"
+              target="_blank"
+            >
+              Link Here
+            </a>
+          </a>
         </div>
-      </React.Fragment>)
+      </React.Fragment>
     );
 
 
